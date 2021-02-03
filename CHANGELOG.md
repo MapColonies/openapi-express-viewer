@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.0.0 (2021-02-03)
+
+
+### Features
+
+* **middleware:** implemented OpenapiViewerMiddleware ([48aca4d](https://github.com/MapColonies/openapi-express-viewer/commit/48aca4d09328053f36d6476b07314df0a19bfe4a))
+
 ## 1.1.0 (2021-01-04)
 
 
