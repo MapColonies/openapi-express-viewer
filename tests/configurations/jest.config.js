@@ -2,13 +2,10 @@ module.exports = {
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
-  coverageReporters: ['text', 'html'],
-  rootDir: '../../../.',
-  testMatch: ['<rootDir>/tests/integration/**/*.spec.ts'],
+  rootDir: '../../.',
+  testMatch: ['<rootDir>/tests/**/*.spec.ts'],
   setupFiles: ['<rootDir>/tests/configurations/jest.setup.js'],
-  collectCoverage: true,
   moduleDirectories: ['node_modules', 'src'],
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts}', '!**/node_modules/**', '!**/vendor/**'],
   preset: 'ts-jest',
   reporters: [
     'default',
@@ -18,4 +15,7 @@ module.exports = {
     ],
   ],
   testEnvironment: 'node',
+  collectCoverage: true,
+  coverageReporters: ['text', 'html'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts}', '!**/node_modules/**', '!**/vendor/**'],
 };
