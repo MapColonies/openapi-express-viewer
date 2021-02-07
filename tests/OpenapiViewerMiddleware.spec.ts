@@ -138,7 +138,7 @@ components:
           type: string
         description:
           type: string
-`
+`;
 
 describe('openapiViewerRouter', function () {
   let expressApp: Application;
@@ -148,7 +148,7 @@ describe('openapiViewerRouter', function () {
     const config: OpenapiRouterConfig = {
       filePath: './openapi.yml',
       rawPath: '/api',
-      uiPath: '/api/ui'
+      uiPath: '/api/ui',
     };
     jest.spyOn(fs, 'readFileSync').mockReturnValue(openapiSpec);
     openapiViewerRouter = new OpenapiViewerRouter(config);

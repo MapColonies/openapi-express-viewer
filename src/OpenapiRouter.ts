@@ -5,7 +5,6 @@ import { JsonObject, serve, setup } from 'swagger-ui-express';
 
 import { OpenapiController } from './OpenapiController';
 
-
 export interface OpenapiRouterConfig {
   filePath: string;
   rawPath?: string;
