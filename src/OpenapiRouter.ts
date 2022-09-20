@@ -6,7 +6,7 @@ import { JsonObject, serve, setup } from 'swagger-ui-express';
 import { OpenapiController } from './OpenapiController';
 
 export interface OpenapiRouterConfig {
-  filePath: string;
+  filePathOrSpec: string | JsonObject;
   rawPath?: string;
   uiPath: string;
 }
@@ -26,8 +26,15 @@ export class OpenapiViewerRouter {
     if (this.isAlreadySetup) {
       throw new Error("Can't call setup twice on object.");
     }
-    const openapiSpecYml = readFileSync(this.config.filePath, 'utf8');
-    const openapiSpec = load(openapiSpecYml) as JsonObject;
+
+    let openapiSpec: JsonObject;
+
+    if (typeof this.config.filePathOrSpec === 'string') {
+      const openapiSpecYml = readFileSync(this.config.filePathOrSpec, 'utf8');
+      openapiSpec = load(openapiSpecYml) as JsonObject;
+    } else {
+      openapiSpec = this.config.filePathOrSpec;
+    }
 
     this.openapiController = new OpenapiController(openapiSpec);
     this.router = Router();

@@ -141,48 +141,80 @@ components:
 `;
 
 describe('openapiViewerRouter', function () {
-  let expressApp: Application;
-  let openapiViewerRouter: OpenapiViewerRouter;
+  let expressAppUsingFile: Application;
+  let expressAppUsingSpec: Application;
+  let openapiViewerRouterFromFile: OpenapiViewerRouter;
+  let openapiViewerRouterFromSpec: OpenapiViewerRouter;
+  let apps: Application[];
 
-  beforeAll(function () {
-    const config: OpenapiRouterConfig = {
-      filePath: './openapi.yml',
-      rawPath: '/api',
-      uiPath: '/api/ui',
-    };
-    jest.spyOn(fs, 'readFileSync').mockReturnValue(openapiSpec);
-    openapiViewerRouter = new OpenapiViewerRouter(config);
-    openapiViewerRouter.setup();
-    expressApp = express();
-    expressApp.use('/docs', openapiViewerRouter.getRouter());
-  });
   describe('Serve UI', function () {
+    beforeAll(function () {
+      // initialize express app using file config
+      const configUsingFile: OpenapiRouterConfig = {
+        filePathOrSpec: './openapi.yml',
+        rawPath: '/api',
+        uiPath: '/api/ui',
+      };
+      jest.spyOn(fs, 'readFileSync').mockReturnValue(openapiSpec);
+      openapiViewerRouterFromFile = new OpenapiViewerRouter(configUsingFile);
+      openapiViewerRouterFromFile.setup();
+      expressAppUsingFile = express();
+      expressAppUsingFile.use('/docs', openapiViewerRouterFromFile.getRouter());
+
+      // initialize express app using spec config
+      const configUsingSpec: OpenapiRouterConfig = {
+        filePathOrSpec: openapiSpec,
+        rawPath: '/api',
+        uiPath: '/api/ui',
+      };
+      openapiViewerRouterFromSpec = new OpenapiViewerRouter(configUsingSpec);
+      openapiViewerRouterFromSpec.setup();
+      expressAppUsingSpec = express();
+      expressAppUsingSpec.use('/docs', openapiViewerRouterFromSpec.getRouter());
+
+      apps = [expressAppUsingFile, expressAppUsingSpec];
+    });
+
     describe('Happy Path 😀', function () {
       it('should return 301 status code when requesting the /docs/api/ui', async function () {
-        const response = await supertest.agent(expressApp).get('/docs/api/ui');
-        expect(response).toHaveProperty('statusCode', StatusCodes.MOVED_PERMANENTLY);
-        expect(response).toHaveProperty('headers.location', '/docs/api/ui/');
+        for await (const app of apps) {
+          const response = await supertest.agent(app).get('/docs/api/ui');
+          expect(response).toHaveProperty('statusCode', StatusCodes.MOVED_PERMANENTLY);
+          expect(response).toHaveProperty('headers.location', '/docs/api/ui/');
+        }
       });
+
       it('should return 200 status code when requesting the /docs/api.json an the spec should be equal', async function () {
-        const response = await supertest.agent(expressApp).get('/docs/api.json');
-        expect(response).toHaveProperty('statusCode', StatusCodes.OK);
-        expect(response).toHaveProperty('body', load(openapiSpec));
+        for await (const app of apps) {
+          const response = await supertest.agent(app).get('/docs/api.json');
+          expect(response).toHaveProperty('statusCode', StatusCodes.OK);
+          expect(response).toHaveProperty('body', load(openapiSpec));
+        }
       });
+
       it('should return 200 status code when requesting the /docs/api.yml an the spec should be equal', async function () {
-        const response = await supertest.agent(expressApp).get('/docs/api.yml');
-        expect(response).toHaveProperty('statusCode', StatusCodes.OK);
-        expect(response).toHaveProperty('text', expectedOpenapiYamlSpec);
+        for await (const app of apps) {
+          const response = await supertest.agent(app).get('/docs/api.yml');
+          expect(response).toHaveProperty('statusCode', StatusCodes.OK);
+          expect(response).toHaveProperty('text', expectedOpenapiYamlSpec);
+        }
       });
+
       it('should return 200 status code when requesting the /docs/api.yaml an the spec should be equal', async function () {
-        const response = await supertest.agent(expressApp).get('/docs/api.yaml');
-        expect(response).toHaveProperty('statusCode', StatusCodes.OK);
-        expect(response).toHaveProperty('text', expectedOpenapiYamlSpec);
+        for await (const app of apps) {
+          const response = await supertest.agent(app).get('/docs/api.yaml');
+          expect(response).toHaveProperty('statusCode', StatusCodes.OK);
+          expect(response).toHaveProperty('text', expectedOpenapiYamlSpec);
+        }
       });
     });
+
     describe('Sad Path 😔', function () {
       it('should return 404 status code when requesting the /docs/api/', async function () {
-        const response = await supertest.agent(expressApp).get('/docs/api/');
-        expect(response).toHaveProperty('statusCode', StatusCodes.NOT_FOUND);
+        for await (const app of apps) {
+          const response = await supertest.agent(app).get('/docs/api/');
+          expect(response).toHaveProperty('statusCode', StatusCodes.NOT_FOUND);
+        }
       });
     });
   });
