@@ -147,34 +147,34 @@ describe('openapiViewerRouter', function () {
   let openapiViewerRouterFromSpec: OpenapiViewerRouter;
   let apps: Application[];
 
+  beforeAll(function () {
+    // initialize express app using file config
+    const configUsingFile: OpenapiRouterConfig = {
+      filePathOrSpec: './openapi.yml',
+      rawPath: '/api',
+      uiPath: '/api/ui',
+    };
+    jest.spyOn(fs, 'readFileSync').mockReturnValue(openapiSpec);
+    openapiViewerRouterFromFile = new OpenapiViewerRouter(configUsingFile);
+    openapiViewerRouterFromFile.setup();
+    expressAppUsingFile = express();
+    expressAppUsingFile.use('/docs', openapiViewerRouterFromFile.getRouter());
+
+    // initialize express app using spec config
+    const configUsingSpec: OpenapiRouterConfig = {
+      filePathOrSpec: openapiSpec,
+      rawPath: '/api',
+      uiPath: '/api/ui',
+    };
+    openapiViewerRouterFromSpec = new OpenapiViewerRouter(configUsingSpec);
+    openapiViewerRouterFromSpec.setup();
+    expressAppUsingSpec = express();
+    expressAppUsingSpec.use('/docs', openapiViewerRouterFromSpec.getRouter());
+
+    apps = [expressAppUsingFile, expressAppUsingSpec];
+  });
+
   describe('Serve UI', function () {
-    beforeAll(function () {
-      // initialize express app using file config
-      const configUsingFile: OpenapiRouterConfig = {
-        filePathOrSpec: './openapi.yml',
-        rawPath: '/api',
-        uiPath: '/api/ui',
-      };
-      jest.spyOn(fs, 'readFileSync').mockReturnValue(openapiSpec);
-      openapiViewerRouterFromFile = new OpenapiViewerRouter(configUsingFile);
-      openapiViewerRouterFromFile.setup();
-      expressAppUsingFile = express();
-      expressAppUsingFile.use('/docs', openapiViewerRouterFromFile.getRouter());
-
-      // initialize express app using spec config
-      const configUsingSpec: OpenapiRouterConfig = {
-        filePathOrSpec: openapiSpec,
-        rawPath: '/api',
-        uiPath: '/api/ui',
-      };
-      openapiViewerRouterFromSpec = new OpenapiViewerRouter(configUsingSpec);
-      openapiViewerRouterFromSpec.setup();
-      expressAppUsingSpec = express();
-      expressAppUsingSpec.use('/docs', openapiViewerRouterFromSpec.getRouter());
-
-      apps = [expressAppUsingFile, expressAppUsingSpec];
-    });
-
     describe('Happy Path 😀', function () {
       it('should return 301 status code when requesting the /docs/api/ui', async function () {
         for await (const app of apps) {
