@@ -4,7 +4,7 @@ import { load } from 'js-yaml';
 import { Application } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import * as supertest from 'supertest';
-
+import { JsonObject } from 'swagger-ui-express';
 import { OpenapiRouterConfig, OpenapiViewerRouter } from '../src/index';
 
 const openapiSpec = `openapi: 3.0.1
@@ -162,7 +162,7 @@ describe('openapiViewerRouter', function () {
 
     // initialize express app using spec config
     const configUsingSpec: OpenapiRouterConfig = {
-      filePathOrSpec: openapiSpec,
+      filePathOrSpec: load(openapiSpec) as JsonObject,
       rawPath: '/api',
       uiPath: '/api/ui',
     };
