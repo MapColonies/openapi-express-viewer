@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/MapColonies/openapi-express-viewer/compare/v2.0.1...v2.1.0) (2022-10-19)
+
+
+### Features
+
+* **middleware:** optionally create router spec from object ([325d572](https://github.com/MapColonies/openapi-express-viewer/commit/325d57204981f8633321bacf9b603b3abe59881e))
+* **middleware:** optionally create router spec from object ([#6](https://github.com/MapColonies/openapi-express-viewer/issues/6)) ([a69d6f0](https://github.com/MapColonies/openapi-express-viewer/commit/a69d6f0943fe4990c9acea522517840e270b4364))
+
+
+### Bug Fixes
+
+* test case for app with spec was wrong ([18ba1a2](https://github.com/MapColonies/openapi-express-viewer/commit/18ba1a21a9eb0e67c42f409d55d12ef4181f136d))
+
 ### [2.0.1](https://github.com/MapColonies/openapi-express-viewer/compare/v2.0.0...v2.0.1) (2021-02-07)
 
 ## [2.0.0](https://github.com/MapColonies/openapi-express-viewer/compare/v1.0.0...v2.0.0) (2021-02-07)
