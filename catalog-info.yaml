@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: openapi-express-viewer
-  description: A middleware for viewing the OpenAPI for 
+  description: A middleware for viewing the OpenAPI for
   annotations:
     github.com/project-slug: MapColonies/openapi-express-viewer
   tags:

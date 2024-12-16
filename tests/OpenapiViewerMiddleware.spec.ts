@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import * as express from 'express';
+import fs from 'fs';
+import express from 'express';
 import { load } from 'js-yaml';
 import { Application } from 'express';
 import { StatusCodes } from 'http-status-codes';

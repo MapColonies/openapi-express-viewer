@@ -4,7 +4,6 @@ module.exports = {
   },
   rootDir: '../../.',
   testMatch: ['<rootDir>/tests/**/*.spec.ts'],
-  setupFiles: ['<rootDir>/tests/configurations/jest.setup.js'],
   moduleDirectories: ['node_modules', 'src'],
   preset: 'ts-jest',
   reporters: [
