@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/MapColonies/openapi-express-viewer/compare/v3.0.0...v4.0.0) (2024-12-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* added engine setting to package.json ([#15](https://github.com/MapColonies/openapi-express-viewer/issues/15))
+
+### Features
+
+* add backstage docs ([2a76221](https://github.com/MapColonies/openapi-express-viewer/commit/2a76221f8a781a0e21533cd7458c94210fd9c78a))
+
+
+### Build System
+
+* added engine setting to package.json ([#15](https://github.com/MapColonies/openapi-express-viewer/issues/15)) ([e2331ac](https://github.com/MapColonies/openapi-express-viewer/commit/e2331ac050bf68b8e95cae96b0c60e0a456f8a5e))
+
 ## [3.0.0](https://github.com/MapColonies/openapi-express-viewer/compare/v2.1.0...v3.0.0) (2022-10-19)
 
 ## [2.1.0](https://github.com/MapColonies/openapi-express-viewer/compare/v2.0.1...v2.1.0) (2022-10-19)
