@@ -1,11 +1,10 @@
 module.exports = {
   transform: {
-    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.ts$': '@swc/jest',
   },
   rootDir: '../../.',
   testMatch: ['<rootDir>/tests/**/*.spec.ts'],
   moduleDirectories: ['node_modules', 'src'],
-  preset: 'ts-jest',
   reporters: [
     'default',
     [
