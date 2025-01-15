@@ -4,13 +4,15 @@ updates:
   # deps
   - package-ecosystem: npm
     target-branch: 'master'
+    reviewers:
+      - '@MapColonies/infra'
     schedule:
       interval: weekly
     allow:
       - dependency-type: production
     directory: /
     commit-message:
-      prefix: 'build(deps)'
+      prefix: 'deps'
     groups:
       map-colonies:
         patterns:
@@ -21,6 +23,7 @@ updates:
       patch:
         update-types:
           - patch
+          - minor
   # dev-deps
   - package-ecosystem: npm
     schedule:
@@ -29,7 +32,9 @@ updates:
       - dependency-type: development
     directory: /
     commit-message:
-      prefix: 'build(dev-deps)'
+      prefix: 'deps'
+    reviewers:
+      - '@MapColonies/infra'
     groups:
       map-colonies:
         patterns:
@@ -43,11 +48,12 @@ updates:
       dev-patch:
         update-types:
           - patch
+          - minor
 
   # github deps
   - package-ecosystem: github-actions
     schedule:
       interval: weekly
     commit-message:
-      prefix: 'ci(deps)'
+      prefix: 'ci'
     directory: '/'

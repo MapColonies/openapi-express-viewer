@@ -47,7 +47,8 @@
   "homepage": "https://github.com/MapColonies/openapi-express-viewer#readme",
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
-    "@commitlint/config-conventional": "^19.5.0",
+    "@map-colonies/infra-copilot-instructions": "^1.0.0",
+    "@map-colonies/commitlint-config": "^1.0.0",
     "@map-colonies/eslint-config": "^4.0.0",
     "@map-colonies/prettier-config": "0.0.1",
     "@types/express": "^4.17.21",
