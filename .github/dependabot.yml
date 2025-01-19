@@ -13,6 +13,8 @@ updates:
     directory: /
     commit-message:
       prefix: 'deps'
+    labels:
+      - 'infra'
     groups:
       map-colonies:
         patterns:
@@ -35,6 +37,8 @@ updates:
       prefix: 'deps'
     reviewers:
       - '@MapColonies/infra'
+    labels:
+      - 'infra'
     groups:
       map-colonies:
         patterns:
@@ -54,6 +58,8 @@ updates:
   - package-ecosystem: github-actions
     schedule:
       interval: weekly
+    labels:
+      - 'infra'
     commit-message:
       prefix: 'ci'
     directory: '/'
