@@ -4,3 +4,4 @@ package-lock.json
 README.md
 coverage
 reports
+.release-please-manifest.json
