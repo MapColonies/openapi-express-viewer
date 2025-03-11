@@ -1,9 +1,8 @@
 import fs from 'fs';
-import express from 'express';
 import { load } from 'js-yaml';
-import { Application } from 'express';
+import express, { Application } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import * as supertest from 'supertest';
+import supertest from 'supertest';
 import { JsonObject } from 'swagger-ui-express';
 import { OpenapiRouterConfig, OpenapiViewerRouter } from '../src/index';
 
@@ -177,7 +176,7 @@ describe('openapiViewerRouter', function () {
   describe('Serve UI', function () {
     describe('Happy Path 😀', function () {
       it('should return 301 status code when requesting the /docs/api/ui', async function () {
-        for await (const app of apps) {
+        for (const app of apps) {
           const response = await supertest.agent(app).get('/docs/api/ui');
           expect(response).toHaveProperty('statusCode', StatusCodes.MOVED_PERMANENTLY);
           expect(response).toHaveProperty('headers.location', '/docs/api/ui/');
@@ -185,7 +184,7 @@ describe('openapiViewerRouter', function () {
       });
 
       it('should return 200 status code when requesting the /docs/api.json an the spec should be equal', async function () {
-        for await (const app of apps) {
+        for (const app of apps) {
           const response = await supertest.agent(app).get('/docs/api.json');
           expect(response).toHaveProperty('statusCode', StatusCodes.OK);
           expect(response).toHaveProperty('body', load(openapiSpec));
@@ -193,7 +192,7 @@ describe('openapiViewerRouter', function () {
       });
 
       it('should return 200 status code when requesting the /docs/api.yml an the spec should be equal', async function () {
-        for await (const app of apps) {
+        for (const app of apps) {
           const response = await supertest.agent(app).get('/docs/api.yml');
           expect(response).toHaveProperty('statusCode', StatusCodes.OK);
           expect(response).toHaveProperty('text', expectedOpenapiYamlSpec);
@@ -201,7 +200,7 @@ describe('openapiViewerRouter', function () {
       });
 
       it('should return 200 status code when requesting the /docs/api.yaml an the spec should be equal', async function () {
-        for await (const app of apps) {
+        for (const app of apps) {
           const response = await supertest.agent(app).get('/docs/api.yaml');
           expect(response).toHaveProperty('statusCode', StatusCodes.OK);
           expect(response).toHaveProperty('text', expectedOpenapiYamlSpec);
@@ -211,7 +210,7 @@ describe('openapiViewerRouter', function () {
 
     describe('Sad Path 😔', function () {
       it('should return 404 status code when requesting the /docs/api/', async function () {
-        for await (const app of apps) {
+        for (const app of apps) {
           const response = await supertest.agent(app).get('/docs/api/');
           expect(response).toHaveProperty('statusCode', StatusCodes.NOT_FOUND);
         }
