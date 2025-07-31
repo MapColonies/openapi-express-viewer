@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/MapColonies/openapi-express-viewer/compare/v4.0.0...v4.1.0) (2025-07-31)
+
+
+### Features
+
+* add optional custom ability ([#43](https://github.com/MapColonies/openapi-express-viewer/issues/43)) ([f25ecba](https://github.com/MapColonies/openapi-express-viewer/commit/f25ecba6cbd5af7a08fc41cc7ef6d189efd5d42f))
+
 ## [4.0.0](https://github.com/MapColonies/openapi-express-viewer/compare/v3.0.0...v4.0.0) (2025-02-03)
 
 
