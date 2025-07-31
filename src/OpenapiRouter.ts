@@ -9,6 +9,7 @@ export interface OpenapiRouterConfig {
   filePathOrSpec: string | JsonObject;
   rawPath?: string;
   uiPath: string;
+  customUiCss?: string;
 }
 
 /**
@@ -79,7 +80,7 @@ export class OpenapiViewerRouter {
     }
 
     this.router.use(this.config.uiPath, serve);
-    this.router.get(this.config.uiPath, setup(openapiSpec));
+    this.router.get(this.config.uiPath, setup(openapiSpec, undefined, undefined, this.config.customUiCss));
     this.isAlreadySetup = true;
   }
 
